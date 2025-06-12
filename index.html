@@ -2,9 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Latent Space Cellular Automata Scriping Tool</title>
+  <title>Blockly Spell Creator</title>
   <script src="https://unpkg.com/blockly/blockly.min.js"></script>
-  <!-- Added the necessary CSS for Blockly UI elements -->
   <link rel="stylesheet" href="https://unpkg.com/blockly/blockly.css">
   <style>
     body {
@@ -14,208 +13,179 @@
       margin: 0;
       background-color: #f0f2f5;
     }
-    #blocklyArea {
-      flex: 1;
-      height: 100%;
-      position: relative;
-    }
-    #blocklyDiv {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
+    #blocklyArea { flex: 1; height: 100%; position: relative; }
+    #blocklyDiv { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
     #outputArea {
-      flex: 1;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      background-color: #2d2d2d;
-      color: #e0e0e0;
-      padding: 1rem;
-      box-sizing: border-box;
-      overflow: hidden;
+      flex: 1; height: 100%; display: flex; flex-direction: column;
+      background-color: #2d2d2d; color: #e0e0e0; padding: 1rem; box-sizing: border-box; overflow: hidden;
     }
     #outputArea h2 {
-      margin-top: 0;
-      font-weight: 500;
-      color: #ffffff;
-      border-bottom: 1px solid #444;
-      padding-bottom: 0.5rem;
+      margin-top: 0; font-weight: 500; color: #ffffff; border-bottom: 1px solid #444; padding-bottom: 0.5rem;
     }
     #generatedJson {
-      flex: 1;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 14px;
-      overflow-y: auto;
-      background-color: #1e1e1e;
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 1rem;
+      flex: 1; white-space: pre-wrap; word-wrap: break-word; font-family: 'Courier New', Courier, monospace;
+      font-size: 14px; overflow-y: auto; background-color: #1e1e1e; border-radius: 8px; padding: 1rem; margin-bottom: 1rem;
     }
-    .blocklyFlyoutButton {
-        display: none !important;
-    }
-    #buttonContainer {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-    }
+    .blocklyFlyoutButton { display: none !important; }
+    #buttonContainer { display: flex; justify-content: flex-end; gap: 10px; }
     .action-button {
-        color: white;
-        padding: 10px 15px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: 500;
-        text-decoration: none; /* For <a> tags styled as buttons */
-        display: inline-flex; /* Aligns text vertically */
-        align-items: center;
+      color: white; padding: 10px 15px; border: none; border-radius: 8px; cursor: pointer;
+      font-size: 16px; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center;
     }
-    #saveButton {
-        background-color: #4CAF50; /* Green */
-    }
-    #saveButton:hover {
-        background-color: #45a049;
-    }
-    #copyButton {
-        background-color: #008CBA; /* Blue */
-    }
-    #copyButton:hover {
-        background-color: #007ba7;
-    }
-    #switchModeButton {
-        background-color: #f39c12; /* Orange */
-        margin-right: auto; /* Pushes it to the left */
-    }
-    #switchModeButton:hover {
-        background-color: #e67e22;
-    }
+    #saveButton { background-color: #4CAF50; }
+    #saveButton:hover { background-color: #45a049; }
+    #copyButton { background-color: #008CBA; }
+    #copyButton:hover { background-color: #007ba7; }
+    #switchModeButton { background-color: #f39c12; margin-right: auto; }
+    #switchModeButton:hover { background-color: #e67e22; }
   </style>
 </head>
 <body>
-
-  <!-- Blockly container -->
-  <div id="blocklyArea">
-    <div id="blocklyDiv"></div>
-  </div>
-
-  <!-- Output container -->
+  <div id="blocklyArea"><div id="blocklyDiv"></div></div>
   <div id="outputArea">
-    <h2>Generated JSON</h2>
+    <h2>Generated Spell JSON</h2>
     <pre id="generatedJson"></pre>
     <div id="buttonContainer">
-      <a href="#" id="switchModeButton" class="action-button">Switch Mode</a>
+      <a href="../entity-creator/index.html" id="switchModeButton" class="action-button">Switch Mode</a>
       <button id="copyButton" class="action-button">Copy JSON</button>
       <button id="saveButton" class="action-button">Save JSON</button>
     </div>
   </div>
 
-  <!-- Blockly Toolbox Definition -->
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-    <category name="Entity" colour="#5b80a5">
-      <block type="define_entity"></block>
+    <category name="Spell Root" colour="#5b67a5">
+      <block type="define_spell"></block>
     </category>
-    <category name="Behavior" colour="#4a6585">
-        <block type="behavior_root"></block>
+    <category name="Spell Class" colour="#a55b80">
+      <block type="component_projectile"></block>
+      <block type="component_wallCrawl"></block>
+      <block type="component_aoe"></block>
+      <block type="component_shield"></block>
+      <block type="component_explosion"></block>
+      <block type="component_teleportCaster"></block>
+      <block type="component_buffCaster"></block>
+      <block type="component_manifestation"></block>
     </category>
-    <category name="Wrappers" colour="#a5895b">
-      <block type="in_rand_rotation"></block>
-      <block type="in_rand_mirror"></block>
-      <block type="in_rand_flip"></block>
+    <category name="Properties" colour="#5ba55b">
+      <block type="component_element"></block>
+      <block type="component_color"></block>
+      <block type="component_spawnAngle"></block>
+      <block type="component_spawnRandAngle"></block>
+      <block type="component_manaCost"></block>
     </category>
-    <category name="Conditionals" colour="#a55b80">
-      <block type="if_neighbor_conditional"></block>
-      <block type="if_alpha_conditional"></block>
-      <block type="if_neighbor_count"></block>
-      <block type="if_chance"></block>
+    <category name="Modifiers" colour="#a5895b">
+      <block type="component_homing"></block>
+      <block type="component_boomerang"></block>
+      <block type="component_controllable"></block>
     </category>
-    <category name="Actions" colour="#80a55b">
-      <block type="do_swap"></block>
-      <block type="do_spawn"></block>
-      <block type="do_set_type"></block>
-      <block type="do_set_alpha"></block>
-      <block type="do_copy_alpha"></block>
+    <category name="Triggers" colour="#a55b5b">
+      <block type="component_timerTrigger"></block>
+      <block type="component_buttonTrigger"></block>
+      <block type="component_impactTrigger"></block>
+      <block type="component_deathTrigger"></block>
     </category>
   </xml>
 
   <script>
     // --- 1. BLOCK DEFINITIONS ---
-    const allDirections = [["north", "north"], ["northeast", "northeast"], ["east", "east"], ["southeast", "southeast"], ["south", "south"], ["southwest", "southwest"], ["west", "west"], ["northwest", "northwest"]];
-    const selfAndDirections = [["self", "self"], ...allDirections];
-
     Blockly.defineBlocksWithJsonArray([
-      // --- Root & Behavior ---
-      {
-        "type": "define_entity", "message0": "Define Entity: %1", "args0": [{"type": "field_input", "name": "NAME", "text": "plant"}],
-        "message1": "Color Hex: %1", "args1": [{"type": "field_input", "name": "COLOR", "text": "#33aa33"}],
-        "message2": "%1", "args2": [{"type": "input_statement", "name": "BEHAVIOR", "check": "behavior_root"}],
-        "colour": "#5b80a5", "tooltip": "Defines a new entity with its properties and behavior.",
-      },
-      {
-        "type": "behavior_root", "message0": "Behavior with actions: %1", "args0": [{"type": "input_statement", "name": "ACTIONS", "check": "action_list_item"}],
-        "previousStatement": "behavior_root", "colour": "#4a6585", "tooltip": "Container for all entity actions.",
-      },
-      // --- Wrappers ---
-      {"type": "in_rand_rotation", "message0": "in random rotation do %1", "args0": [{"type": "input_statement", "name": "ACTIONS", "check": "action_list_item"}], "previousStatement": "action_list_item", "nextStatement": "action_list_item", "colour": "#a5895b", "tooltip": "Executes nested actions in one random of 8 directions."},
-      {"type": "in_rand_mirror", "message0": "in random mirror do %1", "args0": [{"type": "input_statement", "name": "ACTIONS", "check": "action_list_item"}], "previousStatement": "action_list_item", "nextStatement": "action_list_item", "colour": "#a5895b", "tooltip": "50% chance to mirror nested actions across the vertical axis (east becomes west, etc.)."},
-      {"type": "in_rand_flip", "message0": "in random flip do %1", "args0": [{"type": "input_statement", "name": "ACTIONS", "check": "action_list_item"}], "previousStatement": "action_list_item", "nextStatement": "action_list_item", "colour": "#a5895b", "tooltip": "50% chance to flip nested actions across the horizontal axis (north becomes south, etc.)."},
-      // --- Conditionals ---
-      {"type": "if_alpha_conditional", "message0": "if alpha on %1 is %2 %3", "args0": [{"type": "field_dropdown", "name": "TARGET", "options": selfAndDirections}, {"type": "field_dropdown", "name": "COMPARISON", "options": [["greater than", "greater_than"], ["less than", "less_than"], ["equal to", "equal_to"], ["not equal to", "not_equal_to"]]}, {"type": "field_number", "name": "VALUE", "value": 10}], "message1": "then do %1", "args1": [{ "type": "input_statement", "name": "ACTIONS", "check": "action_list_item" }], "message2": "else do %1", "args2": [{ "type": "input_statement", "name": "ELSE_ACTIONS", "check": "action_list_item" }], "previousStatement": "action_list_item", "nextStatement": "action_list_item", "colour": "#a55b80", "tooltip": "Performs actions based on an alpha value comparison."},
-      {"type": "if_neighbor_conditional", "message0": "if neighbor to the %1 is %2 one of: %3", "args0": [{"type": "field_dropdown", "name": "DIRECTION", "options": allDirections}, {"type": "field_dropdown", "name": "CONDITION", "options": [["", "if_neighbor_is"], ["not", "if_neighbor_is_not"]]}, {"type": "field_input", "name": "OPTIONS", "text": "plant, rock"}], "message1": "then do %1", "args1": [{ "type": "input_statement", "name": "ACTIONS", "check": "action_list_item" }], "message2": "else do %1", "args2": [{ "type": "input_statement", "name": "ELSE_ACTIONS", "check": "action_list_item" }], "previousStatement": "action_list_item", "nextStatement": "action_list_item", "colour": "#a55b80", "tooltip": "Performs actions based on the type of a neighboring entity."},
-      {"type": "if_neighbor_count", "message0": "if count of %1 in directions %2 is %3 %4", "args0": [{"type": "field_input", "name": "OPTIONS", "text": "air"}, {"type": "field_input", "name": "DIRECTION_SET", "text": "north, east, south, west"}, {"type": "field_dropdown", "name": "COMPARISON", "options": [["greater than", "greater_than"], ["less than", "less_than"], ["equal to", "equal_to"], ["not equal to", "not_equal_to"]]}, {"type": "field_number", "name": "COUNT", "value": 2}], "message1": "then do %1", "args1": [{ "type": "input_statement", "name": "ACTIONS", "check": "action_list_item" }], "previousStatement": "action_list_item", "nextStatement": "action_list_item", "colour": "#a55b80", "tooltip": "Counts neighbors of a certain type in the given directions and compares the total."},
-      {"type": "if_chance", "message0": "if %1 %% chance succeeds", "args0": [{"type": "field_number", "name": "PERCENT", "value": 50, "min": 0, "max": 100}], "message1": "then do %1", "args1": [{ "type": "input_statement", "name": "ACTIONS", "check": "action_list_item" }], "previousStatement": "action_list_item", "nextStatement": "action_list_item", "colour": "#a55b80", "tooltip": "Succeeds based on a percentage chance."},
-      // --- Actions ---
-      {"type": "do_swap", "message0": "swap with neighbor to the %1", "args0": [{"type": "field_dropdown", "name": "DIRECTION", "options": allDirections}], "message1": "then do (from new location) %1", "args1": [{"type": "input_statement", "name": "ACTIONS", "check": "action_list_item"}], "previousStatement": "action_list_item", "nextStatement": "action_list_item", "colour": "#80a55b", "tooltip": "Swaps position with a neighbor and ends the turn. Actions inside run from the new location."},
-      {"type": "do_spawn", "message0": "spawn %1 into %2 in direction %3", "args0": [{ "type": "field_input", "name": "SET_TYPE", "text": "plant" }, { "type": "field_input", "name": "INTO_OPTIONS", "text": "air" }, { "type": "field_dropdown", "name": "DIRECTION", "options": allDirections }], "message1": "with alpha (optional) %1", "args1": [{"type": "field_number", "name": "SET_ALPHA", "value": 0}], "previousStatement": "action_list_item", "nextStatement": "action_list_item", "colour": "#80a55b", "tooltip": "Spawns a new entity. An alpha of 0 is ignored."},
-      {"type": "do_set_alpha", "message0": "%1 alpha of %2 with %3", "args0": [{"type": "field_dropdown", "name": "OPERATION", "options": [["set", "set"], ["add to", "add"], ["subtract from", "subtract"]]}, {"type": "field_dropdown", "name": "TARGET", "options": selfAndDirections}, { "type": "field_number", "name": "VALUE", "value": 20 }], "previousStatement": "action_list_item", "nextStatement": "action_list_item", "colour": "#80a55b", "tooltip": "Modifies the alpha value of an entity."},
-      {"type": "do_set_type", "message0": "change type of %1 to %2", "args0": [{"type": "field_dropdown", "name": "TARGET", "options": selfAndDirections}, { "type": "field_input", "name": "TO_TYPE", "text": "flower" }], "previousStatement": "action_list_item", "nextStatement": "action_list_item", "colour": "#80a55b", "tooltip": "Changes the type of an entity."},
-      {"type": "do_copy_alpha", "message0": "copy alpha from %1 to %2", "args0": [{"type": "field_dropdown", "name": "SOURCE_DIRECTION", "options": selfAndDirections}, {"type": "field_dropdown", "name": "DEST_DIRECTION", "options": selfAndDirections}], "previousStatement": "action_list_item", "nextStatement": "action_list_item", "colour": "#80a55b", "tooltip": "Copies alpha from one entity to another."}
+        // --- ROOT ---
+        { "type": "define_spell", "message0": "Spell Name: %1", "args0": [{ "type": "field_input", "name": "FRIENDLY_NAME", "text": "Singeing Arrow Volley" }], "message1": "Count: %1", "args1": [{ "type": "field_number", "name": "COUNT", "value": 1, "min": 1 }], "message2": "Components: %1", "args2": [{ "type": "input_statement", "name": "COMPONENTS" }], "colour": "#5b67a5", "tooltip": "Defines the root of the spell." },
+        // --- SPELL CLASS ---
+        { "type": "component_projectile", "message0": "Projectile | radius %1 speed %2", "args0": [{ "type": "field_number", "name": "RADIUS", "value": 5 }, { "type": "field_number", "name": "SPEED", "value": 15 }], "message1": "bounces (optional) %1 gravity (optional) %2", "args1": [{ "type": "field_number", "name": "BOUNCES", "value": 0 }, { "type": "field_number", "name": "GRAVITY", "value": 0.25 }], "previousStatement": null, "nextStatement": null, "colour": "#a55b80", "tooltip": "A projectile spell." },
+        { "type": "component_wallCrawl", "message0": "WallCrawl | radius %1 speed %2", "args0": [{ "type": "field_number", "name": "RADIUS", "value": 10 }, { "type": "field_number", "name": "SPEED", "value": 15 }], "previousStatement": null, "nextStatement": null, "colour": "#a55b80" },
+        { "type": "component_aoe", "message0": "Area of Effect | radius %1 turns %2", "args0": [{ "type": "field_number", "name": "RADIUS", "value": 150 }, { "type": "field_number", "name": "TURNS", "value": 5 }], "previousStatement": null, "nextStatement": null, "colour": "#a55b80" },
+        { "type": "component_shield", "message0": "Shield | radius %1 turns %2", "args0": [{ "type": "field_number", "name": "RADIUS", "value": 150 }, { "type": "field_number", "name": "TURNS", "value": 5 }], "previousStatement": null, "nextStatement": null, "colour": "#a55b80" },
+        { "type": "component_explosion", "message0": "Explosion | radius %1", "args0": [{ "type": "field_number", "name": "RADIUS", "value": 128 }], "previousStatement": null, "nextStatement": null, "colour": "#a55b80" },
+        { "type": "component_teleportCaster", "message0": "Teleport Caster", "previousStatement": null, "nextStatement": null, "colour": "#a55b80" },
+        { "type": "component_buffCaster", "message0": "Buff Caster | heal %1 resist %2", "args0": [{ "type": "field_number", "name": "HEAL", "value": 0 }, { "type": "field_input", "name": "RESIST", "text": "" }], "previousStatement": null, "nextStatement": null, "colour": "#a55b80" },
+        { "type": "component_manifestation", "message0": "Manifestation | radius %1", "args0": [{ "type": "field_number", "name": "RADIUS", "value": 5 }], "message1": "class %1 color [R,G,B] %2", "args1": [{ "type": "field_dropdown", "name": "CLASS", "options": [["powder", "powder"], ["liquid", "liquid"], ["gas", "gas"], ["solid", "solid"]] }, { "type": "field_input", "name": "COLOR_RGB", "text": "255,100,0" }], "message2": "blocks path %1 density %2", "args2": [{ "type": "field_checkbox", "name": "BLOCKPATH", "checked": false }, { "type": "field_number", "name": "DENSITY", "value": 1 }], "message3": "viscous %1 zombie %2 harmful %3", "args3": [{ "type": "field_checkbox", "name": "VISCOUS", "checked": false }, { "type": "field_checkbox", "name": "ZOMBIE", "checked": false }, { "type": "field_checkbox", "name": "HARMFUL", "checked": false }], "message4": "elements (csv) %1 lifespan (secs) %2", "args4": [{ "type": "field_input", "name": "ELEMENTS", "text": "fire" }, { "type": "field_number", "name": "LIFESPAN", "value": 0 }], "previousStatement": null, "nextStatement": null, "colour": "#a55b80" },
+        // --- PROPERTIES ---
+        { "type": "component_element", "message0": "Element: %1", "args0": [{ "type": "field_input", "name": "ELEMENT", "text": "fire" }], "previousStatement": null, "nextStatement": null, "colour": "#5ba55b" },
+        { "type": "component_color", "message0": "Color [R,G,B]: %1", "args0": [{ "type": "field_input", "name": "RGB", "text": "255,60,0" }], "previousStatement": null, "nextStatement": null, "colour": "#5ba55b" },
+        { "type": "component_spawnAngle", "message0": "Spawn Angle: %1", "args0": [{ "type": "field_angle", "name": "ANGLE", "angle": 0 }], "previousStatement": null, "nextStatement": null, "colour": "#5ba55b" },
+        { "type": "component_spawnRandAngle", "message0": "Spawn Random Angle", "previousStatement": null, "nextStatement": null, "colour": "#5ba55b" },
+        { "type": "component_manaCost", "message0": "Mana Cost: %1", "args0": [{ "type": "field_number", "name": "COST", "value": 10 }], "previousStatement": null, "nextStatement": null, "colour": "#5ba55b" },
+        // --- MODIFIERS ---
+        { "type": "component_homing", "message0": "Homing | strength %1", "args0": [{ "type": "field_number", "name": "STRENGTH", "value": 0.1 }], "previousStatement": null, "nextStatement": null, "colour": "#a5895b" },
+        { "type": "component_boomerang", "message0": "Boomerang | strength %1", "args0": [{ "type": "field_number", "name": "STRENGTH", "value": 0.1 }], "previousStatement": null, "nextStatement": null, "colour": "#a5895b" },
+        { "type": "component_controllable", "message0": "Controllable | mana cost/sec %1", "args0": [{ "type": "field_number", "name": "MANA_COST", "value": 0 }], "previousStatement": null, "nextStatement": null, "colour": "#a5895b" },
+        // --- TRIGGERS ---
+        { "type": "component_timerTrigger", "message0": "On Timer | secs %1 reps %2", "args0": [{ "type": "field_number", "name": "SECS", "value": 1 }, { "type": "field_number", "name": "REPS", "value": 1 }], "message1": "loop %1 replace %2 count %3", "args1": [{ "type": "field_checkbox", "name": "LOOP", "checked": false }, { "type": "field_checkbox", "name": "REPLACE", "checked": false }, { "type": "field_number", "name": "COUNT", "value": 1 }], "message2": "Payload Components: %1", "args2": [{ "type": "input_statement", "name": "PAYLOAD_COMPONENTS" }], "previousStatement": null, "nextStatement": null, "colour": "#a55b5b" },
+        { "type": "component_buttonTrigger", "message0": "On Button Press | reps %1 replace %2 count %3", "args0": [{ "type": "field_number", "name": "REPS", "value": 1 }, { "type": "field_checkbox", "name": "REPLACE", "checked": false }, { "type": "field_number", "name": "COUNT", "value": 1 }], "message1": "Payload Components: %1", "args1": [{ "type": "input_statement", "name": "PAYLOAD_COMPONENTS" }], "previousStatement": null, "nextStatement": null, "colour": "#a55b5b" },
+        { "type": "component_impactTrigger", "message0": "On Impact | reps %1 replace %2 count %3", "args0": [{ "type": "field_number", "name": "REPS", "value": 1 }, { "type": "field_checkbox", "name": "REPLACE", "checked": false }, { "type": "field_number", "name": "COUNT", "value": 1 }], "message1": "Payload Components: %1", "args1": [{ "type": "input_statement", "name": "PAYLOAD_COMPONENTS" }], "previousStatement": null, "nextStatement": null, "colour": "#a55b5b" },
+        { "type": "component_deathTrigger", "message0": "On Death | count %1", "args0": [{ "type": "field_number", "name": "COUNT", "value": 1 }], "message1": "Payload Components: %1", "args1": [{ "type": "input_statement", "name": "PAYLOAD_COMPONENTS" }], "previousStatement": null, "nextStatement": null, "colour": "#a55b5b" }
     ]);
-
+    
     // --- 2. JSON GENERATOR DEFINITIONS ---
     const jsonGenerator = new Blockly.Generator('JSON');
     jsonGenerator.INDENT = '  ';
-    const statementToJSONArray = (block, statementName) => { const statementBlock = block.getInputTargetBlock(statementName); if (!statementBlock) return '[]'; const code = []; let currentBlock = statementBlock; while (currentBlock) { code.push(jsonGenerator.blockToCode(currentBlock)); currentBlock = currentBlock.getNextBlock(); } if (code.length === 0) return '[]'; return `[\n${jsonGenerator.prefixLines(code.join(',\n'), jsonGenerator.INDENT)}\n]`; };
-    const fieldToJSONArray = (fieldValue) => { if (!fieldValue || fieldValue.trim() === "") return '[]'; return `[${fieldValue.split(',').map(s => `"${s.trim()}"`).join(', ')}]`; };
-    jsonGenerator.forBlock['define_entity'] = (b, g) => `{\n${g.prefixLines([`"name": "${b.getFieldValue('NAME')}"`, `"color_hex": "${b.getFieldValue('COLOR')}"`, g.statementToCode(b, 'BEHAVIOR')].filter(line => line).join(',\n'), g.INDENT)}\n}`;
-    jsonGenerator.forBlock['behavior_root'] = (b, g) => `"behavior": {\n${g.prefixLines(`"actions": ${statementToJSONArray(b, 'ACTIONS')}`, g.INDENT)}\n}`;
-    const wrapperGenerator = (type) => (b, g) => `{\n${g.prefixLines([`"type": "${type}"`, `"actions": ${statementToJSONArray(b, 'ACTIONS')}`].join(',\n'), g.INDENT)}\n}`;
-    jsonGenerator.forBlock['in_rand_rotation'] = wrapperGenerator('in_rand_rotation');
-    jsonGenerator.forBlock['in_rand_mirror'] = wrapperGenerator('in_rand_mirror');
-    jsonGenerator.forBlock['in_rand_flip'] = wrapperGenerator('in_rand_flip');
-    jsonGenerator.forBlock['if_alpha_conditional'] = (b, g) => `{\n${g.prefixLines([`"type": "if_alpha"`, `"target": "${b.getFieldValue('TARGET')}"`, `"comparison": "${b.getFieldValue('COMPARISON')}"`, `"is": ${b.getFieldValue('VALUE')}`, `"actions": ${statementToJSONArray(b, 'ACTIONS')}`, `"else_actions": ${statementToJSONArray(b, 'ELSE_ACTIONS')}`].join(',\n'), g.INDENT)}\n}`;
-    jsonGenerator.forBlock['if_neighbor_conditional'] = (b, g) => `{\n${g.prefixLines([`"type": "${b.getFieldValue('CONDITION') || 'if_neighbor_is'}"`, `"direction": "${b.getFieldValue('DIRECTION')}"`, `"options": ${fieldToJSONArray(b.getFieldValue('OPTIONS'))}`, `"actions": ${statementToJSONArray(b, 'ACTIONS')}`, `"else_actions": ${statementToJSONArray(b, 'ELSE_ACTIONS')}`].join(',\n'), g.INDENT)}\n}`;
-    jsonGenerator.forBlock['if_neighbor_count'] = (b, g) => `{\n${g.prefixLines([`"type": "if_neighbor_count"`, `"direction_set": ${fieldToJSONArray(b.getFieldValue('DIRECTION_SET'))}`, `"options": ${fieldToJSONArray(b.getFieldValue('OPTIONS'))}`, `"comparison": "${b.getFieldValue('COMPARISON')}"`, `"count": ${b.getFieldValue('COUNT')}`, `"actions": ${statementToJSONArray(b, 'ACTIONS')}`].join(',\n'), g.INDENT)}\n}`;
-    jsonGenerator.forBlock['if_chance'] = (b, g) => `{\n${g.prefixLines([`"type": "if_chance"`, `"percent": ${b.getFieldValue('PERCENT')}`, `"actions": ${statementToJSONArray(b, 'ACTIONS')}`].join(',\n'), g.INDENT)}\n}`;
-    jsonGenerator.forBlock['do_swap'] = (b, g) => { const nestedActions = statementToJSONArray(b, 'ACTIONS'); const lines = [`"type": "do_swap"`, `"direction": "${b.getFieldValue('DIRECTION')}"`]; if (nestedActions !== '[]') { lines.push(`"actions": ${nestedActions}`); } return `{\n${g.prefixLines(lines.join(',\n'), g.INDENT)}\n}`; };
-    jsonGenerator.forBlock['do_spawn'] = (b, g) => { const alpha = b.getFieldValue('SET_ALPHA'); const lines = [`"type": "do_spawn"`, `"direction": "${b.getFieldValue('DIRECTION')}"`, `"into_options": ${fieldToJSONArray(b.getFieldValue('INTO_OPTIONS'))}`, `"set_type": "${b.getFieldValue('SET_TYPE')}"`]; if (alpha > 0) { lines.push(`"set_alpha": ${alpha}`); } return `{\n${g.prefixLines(lines.join(',\n'), g.INDENT)}\n}`; };
-    jsonGenerator.forBlock['do_set_alpha'] = (b, g) => `{\n${g.prefixLines([`"type": "do_set_alpha"`, `"target": "${b.getFieldValue('TARGET')}"`, `"operation": "${b.getFieldValue('OPERATION')}"`, `"to": ${b.getFieldValue('VALUE')}`].join(',\n'), g.INDENT)}\n}`;
-    jsonGenerator.forBlock['do_set_type'] = (b, g) => `{\n${g.prefixLines([`"type": "do_set_type"`, `"target": "${b.getFieldValue('TARGET')}"`, `"to": "${b.getFieldValue('TO_TYPE')}"`].join(',\n'), g.INDENT)}\n}`;
-    jsonGenerator.forBlock['do_copy_alpha'] = (b, g) => `{\n${g.prefixLines([`"type": "do_copy_alpha"`, `"source_direction": "${b.getFieldValue('SOURCE_DIRECTION')}"`, `"dest_direction": "${b.getFieldValue('DEST_DIRECTION')}"`].join(',\n'), g.INDENT)}\n}`;
+    const statementToJSONArray = (block, name) => { const list = jsonGenerator.statementToCode(block, name); return `[${list ? '\n' + jsonGenerator.prefixLines(list, jsonGenerator.INDENT) + '\n' : ''}]`; };
+    const fieldToJSONArray = (fieldValue) => `[${fieldValue.split(',').map(s => `"${s.trim()}"`).join(', ')}]`;
+    const fieldToRGBArray = (fieldValue) => `[${fieldValue.split(',').map(s => parseInt(s.trim(), 10) || 0).join(', ')}]`;
     
+    jsonGenerator.scrub_ = (block, code, thisOnly) => { const next = block.getNextBlock(); return code + (next ? ',\n' + jsonGenerator.blockToCode(next) : ''); };
+    
+    const addProp = (props, key, value, isOptional = false, defaultVal = 0) => { if (!isOptional || value !== defaultVal) props.push(`"${key}": ${value}`); };
+    const addStrProp = (props, key, value) => { if (value) props.push(`"${key}": "${value}"`); };
+    const addBoolProp = (props, key, value) => { if (value) props.push(`"${key}": ${value}`); };
+    
+    jsonGenerator.forBlock['define_spell'] = (b, g) => `{\n${g.prefixLines([`"friendlyName": "${b.getFieldValue('FRIENDLY_NAME')}"`, `"count": ${b.getFieldValue('COUNT')}`, `"components": ${statementToJSONArray(b, 'COMPONENTS')}`].join(',\n'), g.INDENT)}\n}`;
+    const simpleComponent = (type) => (b, g) => `{"componentType": "${type}"}`;
+    const propertyComponent = (build) => (b,g) => { let props = [`"componentType": "${b.type.replace('component_','')}"`]; build(props, b, g); return `{\n${g.prefixLines(props.join(',\n'), g.INDENT)}\n}`; };
+    
+    jsonGenerator.forBlock['component_projectile'] = propertyComponent((p, b) => { addProp(p, 'radius', b.getFieldValue('RADIUS')); addProp(p, 'speed', b.getFieldValue('SPEED')); addProp(p, 'bounces', b.getFieldValue('BOUNCES'), true); addProp(p, 'gravity', b.getFieldValue('GRAVITY'), true, 0.25); });
+    jsonGenerator.forBlock['component_wallCrawl'] = propertyComponent((p, b) => { addProp(p, 'radius', b.getFieldValue('RADIUS')); addProp(p, 'speed', b.getFieldValue('SPEED')); });
+    jsonGenerator.forBlock['component_aoe'] = propertyComponent((p, b) => { addProp(p, 'radius', b.getFieldValue('RADIUS')); addProp(p, 'turns', b.getFieldValue('TURNS')); });
+    jsonGenerator.forBlock['component_shield'] = propertyComponent((p, b) => { addProp(p, 'radius', b.getFieldValue('RADIUS')); addProp(p, 'turns', b.getFieldValue('TURNS')); });
+    jsonGenerator.forBlock['component_explosion'] = propertyComponent((p, b) => { addProp(p, 'radius', b.getFieldValue('RADIUS')); });
+    jsonGenerator.forBlock['component_teleportCaster'] = simpleComponent('teleportCaster');
+    jsonGenerator.forBlock['component_buffCaster'] = propertyComponent((p, b) => { addProp(p, 'heal', b.getFieldValue('HEAL'), true); addStrProp(p, 'resist', b.getFieldValue('RESIST')); });
+    jsonGenerator.forBlock['component_manifestation'] = propertyComponent((p, b, g) => {
+        addProp(p, 'radius', b.getFieldValue('RADIUS'));
+        const matProps = [
+            `"class": "${b.getFieldValue('CLASS')}"`,
+            `"color_rgb": ${fieldToRGBArray(b.getFieldValue('COLOR_RGB'))}`,
+            `"blockpath": ${b.getFieldValue('BLOCKPATH') === 'TRUE'}`,
+            `"density": ${b.getFieldValue('DENSITY')}`,
+            `"elements": ${fieldToJSONArray(b.getFieldValue('ELEMENTS'))}`
+        ];
+        addBoolProp(matProps, 'viscous', b.getFieldValue('VISCOUS') === 'TRUE');
+        addBoolProp(matProps, 'zombie', b.getFieldValue('ZOMBIE') === 'TRUE');
+        addBoolProp(matProps, 'harmful', b.getFieldValue('HARMFUL') === 'TRUE');
+        addProp(matProps, 'lifespan', b.getFieldValue('LIFESPAN'), true);
+        p.push(`"material_properties": {\n${g.prefixLines(matProps.join(',\n'), g.INDENT)}\n}`);
+    });
+    
+    jsonGenerator.forBlock['component_element'] = propertyComponent((p, b) => addStrProp(p, 'element', b.getFieldValue('ELEMENT')));
+    jsonGenerator.forBlock['component_color'] = propertyComponent((p, b) => addProp(p, 'rgb', fieldToRGBArray(b.getFieldValue('RGB'))));
+    jsonGenerator.forBlock['component_spawnAngle'] = propertyComponent((p, b) => addProp(p, 'angle', b.getFieldValue('ANGLE')));
+    jsonGenerator.forBlock['component_spawnRandAngle'] = simpleComponent('spawnRandAngle');
+    jsonGenerator.forBlock['component_manaCost'] = propertyComponent((p, b) => addProp(p, 'cost', b.getFieldValue('COST')));
+    
+    jsonGenerator.forBlock['component_homing'] = propertyComponent((p, b) => addProp(p, 'strength', b.getFieldValue('STRENGTH')));
+    jsonGenerator.forBlock['component_boomerang'] = propertyComponent((p, b) => addProp(p, 'strength', b.getFieldValue('STRENGTH')));
+    jsonGenerator.forBlock['component_controllable'] = propertyComponent((p, b) => addProp(p, 'mana_cost', b.getFieldValue('MANA_COST'), true));
+    
+    const triggerComponent = (build) => propertyComponent((p, b, g) => { build(p, b); p.push(`"payload_components": ${statementToJSONArray(b, 'PAYLOAD_COMPONENTS')}`); });
+    jsonGenerator.forBlock['component_timerTrigger'] = triggerComponent((p, b) => { addProp(p, 'secs', b.getFieldValue('SECS')); addBoolProp(p, 'loop', b.getFieldValue('LOOP') === 'TRUE'); addProp(p, 'reps', b.getFieldValue('REPS'), true, 1); addBoolProp(p, 'replace', b.getFieldValue('REPLACE') === 'TRUE'); addProp(p, 'count', b.getFieldValue('COUNT'), true, 1); });
+    jsonGenerator.forBlock['component_buttonTrigger'] = triggerComponent((p, b) => { addProp(p, 'reps', b.getFieldValue('REPS'), true, 1); addBoolProp(p, 'replace', b.getFieldValue('REPLACE') === 'TRUE'); addProp(p, 'count', b.getFieldValue('COUNT'), true, 1); });
+    jsonGenerator.forBlock['component_impactTrigger'] = triggerComponent((p, b) => { addProp(p, 'reps', b.getFieldValue('REPS'), true, 1); addBoolProp(p, 'replace', b.getFieldValue('REPLACE') === 'TRUE'); addProp(p, 'count', b.getFieldValue('COUNT'), true, 1); });
+    jsonGenerator.forBlock['component_deathTrigger'] = triggerComponent((p, b) => { addProp(p, 'count', b.getFieldValue('COUNT'), true, 1); });
+
     // --- 3. WORKSPACE INITIALIZATION & APP LOGIC ---
-    const workspace = Blockly.inject('blocklyDiv', { toolbox: document.getElementById('toolbox'), renderer: 'zelos', theme: Blockly.Themes.Dark, grid: { spacing: 20, length: 3, colour: '#444', snap: true }, zoom: { controls: true, wheel: true, startScale: 0.8, maxScale: 3, minScale: 0.3, scaleSpeed: 1.2 }, move: { scrollbars: { horizontal: true, vertical: true }, drag: true, wheel: false } });
+    const workspace = Blockly.inject('blocklyDiv', { toolbox: document.getElementById('toolbox'), renderer: 'zelos', theme: Blockly.Themes.Dark, grid: { spacing: 20, length: 3, colour: '#444', snap: true }, zoom: { controls: true, wheel: true, startScale: 0.8 }, move: { scrollbars: { horizontal: true, vertical: true }, drag: true, wheel: false } });
     const outputDiv = document.getElementById('generatedJson');
-    function updateJson(event) { if (event && (event.isUiEvent || event.type == Blockly.Events.CREATE && !event.xml)) { return; } try { const code = jsonGenerator.workspaceToCode(workspace); const finalCode = code || "{}"; const parsed = JSON.parse(finalCode); outputDiv.textContent = JSON.stringify(parsed, null, 2); outputDiv.style.color = '#90ee90'; } catch (e) { const rawCode = jsonGenerator.workspaceToCode(workspace) || "Error generating code."; outputDiv.textContent = rawCode + '\n\nError: ' + e.message; outputDiv.style.color = '#ff7b7b'; } }
+    function updateJson(event) { if (event && (event.isUiEvent || event.type == Blockly.Events.CREATE && !event.xml)) return; try { const code = jsonGenerator.workspaceToCode(workspace) || '{}'; const parsed = JSON.parse(code); outputDiv.textContent = JSON.stringify(parsed, null, 2); outputDiv.style.color = '#90ee90'; } catch (e) { outputDiv.textContent = (jsonGenerator.workspaceToCode(workspace) || "Error generating code.") + '\n\nError: ' + e.message; outputDiv.style.color = '#ff7b7b'; } }
     workspace.addChangeListener(updateJson);
-
-    // Save to file function
-    function saveJsonToFile() { const jsonString = outputDiv.textContent; try { JSON.parse(jsonString); const blob = new Blob([jsonString], {type: "application/json"}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'entity.json'; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); } catch (e) { alert("Could not save: The generated code is not valid JSON.\nError: " + e.message); } }
+    function saveJsonToFile() { try { const jsonString = outputDiv.textContent; JSON.parse(jsonString); const blob = new Blob([jsonString], {type: "application/json"}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'spell.json'; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); } catch (e) { alert("Could not save: The generated code is not valid JSON.\nError: " + e.message); } }
     document.getElementById('saveButton').addEventListener('click', saveJsonToFile);
-
-    // Copy to clipboard function
-    function copyJsonToClipboard() { const jsonString = outputDiv.textContent; const textArea = document.createElement('textarea'); textArea.value = jsonString; textArea.style.position = 'fixed'; textArea.style.top = '-9999px'; textArea.style.left = '-9999px'; document.body.appendChild(textArea); textArea.select(); try { document.execCommand('copy'); const copyButton = document.getElementById('copyButton'); const originalText = copyButton.textContent; copyButton.textContent = 'Copied!'; setTimeout(() => { copyButton.textContent = originalText; }, 2000); } catch (err) { alert('Could not copy the JSON to clipboard.'); } document.body.removeChild(textArea); }
+    function copyJsonToClipboard() { const jsonString = outputDiv.textContent; const textArea = document.createElement('textarea'); textArea.value = jsonString; document.body.appendChild(textArea); textArea.select(); try { document.execCommand('copy'); const copyButton = document.getElementById('copyButton'); const originalText = copyButton.textContent; copyButton.textContent = 'Copied!'; setTimeout(() => { copyButton.textContent = originalText; }, 2000); } catch (err) { alert('Could not copy.'); } document.body.removeChild(textArea); }
     document.getElementById('copyButton').addEventListener('click', copyJsonToClipboard);
 
-    const defaultXml = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="define_entity" x="50" y="50"><field name="NAME">plant</field><field name="COLOR">#33aa33</field><statement name="BEHAVIOR"><block type="behavior_root"><statement name="ACTIONS"><block type="if_alpha_conditional"><field name="TARGET">self</field><field name="COMPARISON">greater_than</field><field name="VALUE">10</field><statement name="ACTIONS"><block type="in_rand_mirror"><statement name="ACTIONS"><block type="if_neighbor_conditional"><field name="DIRECTION">northeast</field><field name="CONDITION">if_neighbor_is_not</field><field name="OPTIONS">plant</field><statement name="ACTIONS"><block type="if_neighbor_conditional"><field name="DIRECTION">northwest</field><field name="CONDITION">if_neighbor_is</field><field name="OPTIONS">air</field><statement name="ACTIONS"><block type="do_spawn"><field name="SET_TYPE">plant</field><field name="INTO_OPTIONS">air</field><field name="DIRECTION">northeast</field><field name="SET_ALPHA">0</field><next><block type="do_copy_alpha"><field name="SOURCE_DIRECTION">self</field><field name="DEST_DIRECTION">northeast</field><next><block type="do_set_alpha"><field name="OPERATION">subtract</field><field name="TARGET">northeast</field><field name="VALUE">20</field></block></next></block></next></block></statement></block></statement></block></statement></block></statement><statement name="ELSE_ACTIONS"><block type="do_set_type"><field name="TARGET">self</field><field name="TO_TYPE">flower</field></block></statement></block></statement></block></statement></block></xml>`;
+    const defaultXml = `<xml xmlns="https://developers.google.com/blockly/xml"><block type="define_spell" x="50" y="50"><field name="FRIENDLY_NAME">Singeing Arrow Volley</field><field name="COUNT">3</field><statement name="COMPONENTS"><block type="component_projectile"><field name="RADIUS">5</field><field name="SPEED">15</field><field name="BOUNCES">0</field><field name="GRAVITY">0.25</field><next><block type="component_element"><field name="ELEMENT">fire</field><next><block type="component_color"><field name="RGB">255, 60, 0</field><next><block type="component_manaCost"><field name="COST">10</field><next><block type="component_impactTrigger"><field name="REPS">1</field><field name="REPLACE">FALSE</field><field name="COUNT">1</field><statement name="PAYLOAD_COMPONENTS"><block type="component_manifestation"><field name="RADIUS">5</field><field name="CLASS">gas</field><field name="COLOR_RGB">255, 100, 0</field><field name="BLOCKPATH">FALSE</field><field name="DENSITY">0.1</field><field name="VISCOUS">FALSE</field><field name="ZOMBIE">FALSE</field><field name="HARMFUL">FALSE</field><field name="ELEMENTS">fire</field><field name="LIFESPAN">1</field></block></statement></block></next></block></next></block></next></block></next></block></statement></block></xml>`;
     Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(defaultXml), workspace);
     updateJson({type: 'manual_init'});
   </script>
-
 </body>
 </html>
