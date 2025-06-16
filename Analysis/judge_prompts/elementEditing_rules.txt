@@ -1,0 +1,39 @@
+Your primary role is to evaluate a model's ability to accurately modify a structured JSON object representing a game's elemental interaction matrix. You will assess how well the model interpreted a natural language request to either add a new element or change existing relationships, and then generated a complete, updated JSON object reflecting that change.
+
+This prompt provides all necessary information in a structured format. First, you will be presented with the **Task Rules**, which define the required structure and logical consistency of the elemental data. Following these rules, you will find the **Evaluation Rubric** to guide your scoring and the required **Output Schema** for your own response.
+
+Finally, you will see the full task, which includes the original **User Input** (the modification request), the **Context** (the *original* elemental data JSON), the **Response to Evaluate** (the *new* elemental data JSON), and an **Algorithmic Validation** pre-check result.
+
+Please begin by carefully reviewing the rules for a valid elemental data object below.
+
+---
+### **Rules for a Correctly Formatted Elemental Data Object**
+
+The evaluated response must be a single JSON object that conforms to the following structural and logical requirements.
+
+#### **I. Structural Requirements**
+
+1.  **Root Object:** Must contain an `elements` key, with its value being an array of all element name strings.
+2.  **Element Keys:** For each `element_name` in the `elements` array, a corresponding top-level key named `element_name` must exist.
+3.  **Detail Map:** The value for each top-level element key must be a JSON object (an 'element detail map').
+4.  **Color Key:** The detail map MUST contain an `RGB_COLOR` key, with a value that is an array of three integers `[R, G, B]`.
+5.  **Sound Key:** The detail map MUST contain a `SOUND_LIB` key, with a value that is a string chosen from: `"flaming"`, `"blowing"`, `"crackling"`, or `"energetic"`.
+6.  **Interaction Keys:** The detail map must contain keys for ALL other elements (including itself) to represent its attack interactions.
+7.  **Interaction Values:** The values for interaction keys must be integers: `1` (Strong), `-1` (Weak), or `0` (Neutral).
+
+* **Example Structure Snippet:**
+    `{ "elements": ["fire", ...], "fire": {"RGB_COLOR": [255,0,0], "SOUND_LIB": "flaming", "fire": 0, "water": -1, ...}, ... }`
+
+#### **II. Logical Requirements**
+
+1.  **Bidirectionality:** Interactions must be bidirectional. If element X's value for attacking Y is `1`, then Y's value for attacking X must be `-1`.
+2.  **Self-Interaction:** An element's interaction value with itself must always be `0`.
+3.  **Integrity on Modification:** When a relationship is modified:
+    * The specific interaction requested must be updated correctly.
+    * The inverse interaction must be updated simultaneously and correctly.
+    * All other data (other relationships, `RGB_COLOR` values, `SOUND_LIB` values) must be preserved unless the change was explicitly requested.
+4.  **Integrity on Addition:** When a new element is added:
+    * Its name must appear in the `elements` array.
+    * Its new top-level key and a complete detail map must be created.
+    * It must be added as a defender key to all other existing elements' detail maps.
+    * Its new relationships should be approximately balanced (1/3 strong, 1/3 weak, 1/3 neutral) and must adhere to the bidirectionality rule.

@@ -1,0 +1,22 @@
+You will evaluate the generated cellular automata script based on the following four axes. Score each from 1 (poor) to 5 (excellent).
+
+1.  **Structural Correctness (1-5):**
+    * This is informed by the "Algorithmic Pre-Check". If the pre-check failed, this score cannot be higher than 2.
+    * 1: The root object is missing required keys ('name', 'color_hex', 'behavior') or the JSON is invalid.
+    * 3: The structure is mostly correct, but a node in the 'actions' list might be missing a 'type' key or have an incorrect data type for a property.
+    * 5: The output is perfectly structured, with all required keys and correct data types throughout the entire node graph.
+
+2.  **Logical Implementation (1-5):**
+    * 1: The behavior script has no logical connection to the user's description.
+    * 3: The script attempts to implement the logic but is flawed. A "climbing" element might check for a wall but move in the wrong direction, or a "sinking" element might not check for empty space below it.
+    * 5: The sequence and nesting of nodes in the 'behavior' script perfectly and efficiently creates the behavior described in the user's input. The logic is sound.
+
+3.  **Creativity & Naming (1-5):**
+    * 1: The 'name' is generic or violates the constraints (too long, not lowercase). The 'color_hex' is generic (e.g., pure red/black/white).
+    * 3: The 'name' and 'color_hex' are acceptable but uninspired.
+    * 5: The model invented a creative, fitting, and valid 'name' for the element and chose a thematic 'color_hex' that enhances the concept.
+
+4.  **Contextual Awareness (1-5):**
+    * 1: The script completely ignores the existing elements provided in the context.
+    * 3: The script shows minimal awareness, perhaps only checking for 'air'.
+    * 5: The script's behavior is thoughtfully designed to interact with the existing elements provided in the context (e.g., it correctly tries to destroy 'rock', turn 'water' to 'steam', or climb 'wall').

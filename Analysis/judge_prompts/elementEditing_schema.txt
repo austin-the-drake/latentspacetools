@@ -1,0 +1,20 @@
+You MUST respond with a single, valid JSON object and nothing else. The root object must contain two keys: "scores" and "rationales".
+
+-   "scores": An object containing a numerical score (1-5) for each of the four rubric axes: `integrity`, `fulfillment`, `consistency`, and `preservation`.
+-   "rationales": An object containing a brief, one-sentence text explanation for each score.
+
+Example Output:
+{
+    "scores": {
+        "integrity": 5,
+        "fulfillment": 5,
+        "consistency": 5,
+        "preservation": 5
+    },
+    "rationales": {
+        "integrity": "The output perfectly maintained the required JSON data structure.",
+        "fulfillment": "The request to make 'fire' strong against 'grass' was implemented correctly.",
+        "consistency": "The inverse relationship, making 'grass' weak against 'fire', was also correctly implemented.",
+        "preservation": "No other relationships, colors, or sounds were unnecessarily altered."
+    }
+}

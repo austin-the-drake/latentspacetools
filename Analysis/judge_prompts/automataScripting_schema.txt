@@ -1,0 +1,20 @@
+You MUST respond with a single, valid JSON object and nothing else. The root object must contain two keys: "scores" and "rationales".
+
+-   "scores": An object containing a numerical score (1-5) for each of the four rubric axes: `correctness`, `logic`, `creativity`, and `awareness`.
+-   "rationales": An object containing a brief, one-sentence text explanation for each score.
+
+Example Output:
+{
+    "scores": {
+        "correctness": 5,
+        "logic": 5,
+        "creativity": 4,
+        "awareness": 3
+    },
+    "rationales": {
+        "correctness": "The output was perfectly structured and passed the algorithmic pre-check.",
+        "logic": "The use of 'if_neighbor_is' followed by 'do_swap' correctly implements the sinking behavior.",
+        "creativity": "The name 'dust' is fitting, though the color is a bit generic.",
+        "awareness": "The script only checks for 'air' and does not define any special interaction with 'wall' or other provided elements."
+    }
+}

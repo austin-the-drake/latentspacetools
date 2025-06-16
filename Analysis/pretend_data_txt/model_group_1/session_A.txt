@@ -1,0 +1,10 @@
+[task1-2025-06-15-10-12-01]
+input::An input for task 1.
+context::["Some context for task 1."]
+response::{"text": "model 1 response to task 1"}
+---END_SECTION---
+[task2-2025-06-15-10-14-15]
+input::An input for task 2.
+context::["Some context for task 2."]
+response::{"text": "model 1 response to task 2"}
+---END_SECTION---

@@ -1,0 +1,67 @@
+[
+  {
+    "input": "**Chronos' Whisper:** A faint golden hum emanates, the air shimmers around a target, then time visibly rewinds a few seconds for that object, restoring it to a previous state or position.",
+    "context": [
+      "Space",
+      "Sand",
+      "Celestial",
+      "Distortion",
+      "Nether",
+      "Death",
+      "Void",
+      "Steam"
+    ]
+  },
+  {
+    "input": "**Verdant Embrace:** Hands glow with soft green light, touching the earth. Tiny sprouts erupt rapidly, intertwining and blossoming into a temporary, vibrant wall of thorny vines that springs up in moments.",
+    "context": [
+      "Celestial",
+      "Rune",
+      "Blood",
+      "Light",
+      "Earth"
+    ]
+  },
+  {
+    "input": "**Echoing Void:** A hand gestures, pulling at the air. A small, silent vortex of inky blackness forms, absorbing all light and sound within its radius, then collapses inward with a soft, unnerving implosion.",
+    "context": [
+      "Sand",
+      "Bone",
+      "Blood",
+      "Sound",
+      "Earth",
+      "Void",
+      "Spirit",
+      "Illusion"
+    ]
+  },
+  {
+    "input": "**Cinderstep Illusion:** A quick flick of the wrist. A fleeting, fiery doppelganger erupts from the caster's form, sprinting a short distance before dissolving into a shower of harmless, winking embers.",
+    "context": [
+      "Celestial",
+      "Poison",
+      "Time",
+      "Arcane",
+      "Gravity",
+      "Death",
+      "Crystal",
+      "Sand",
+      "Light"
+    ]
+  },
+  {
+    "input": "**Sky-Singer's Charm:** A melodic hum, fingers tracing patterns in the air. Wisps of wind gather and condense, forming a miniature, hovering orb that emits a series of low, resonant chimes, affecting the disposition of nearby creatures.",
+    "context": [
+      "Celestial",
+      "Mind",
+      "Bone",
+      "Blood",
+      "Fear",
+      "Air",
+      "Light",
+      "Sound",
+      "Wood",
+      "Distortion"
+    ]
+  }
+]

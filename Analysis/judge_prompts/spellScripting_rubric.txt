@@ -1,0 +1,22 @@
+You will evaluate the generated spell script based on the following four axes. Score each from 1 (poor) to 5 (excellent).
+
+1.  **Adherence to Rules (1-5):**
+    * 1: Uses many undefined components, properties, or invalid string values. Ignores fundamental rules.
+    * 3: Mostly uses correct components but may invent an optional property or misremember a component name.
+    * 5: Strictly uses ONLY the `componentType`s and their associated properties as defined in the Task Rules. All enumerated values are from the provided lists.
+
+2.  **Structural & Syntactic Correctness (1-5):**
+    * This is informed by the "Algorithmic Pre-Check". If the pre-check failed, this score cannot be higher than 2.
+    * 1: Invalid JSON or major structural errors (e.g., 'components' is not a list).
+    * 3: Valid JSON, but with some data type errors (e.g., a number as a string) or incorrect list lengths.
+    * 5: The entire response is a single, valid JSON object with perfect data types and structure throughout, including in nested payloads.
+
+3.  **Conceptual Fidelity (1-5):**
+    * 1: The generated spell has little to no connection to the user's input description.
+    * 3: The spell captures the basic idea but misses key details or misinterprets the main concept.
+    * 5: The components selected and their values perfectly represent the spell concept from the user's input. The final spell feels exactly like what was requested.
+
+4.  **Creativity & Completeness (1-5):**
+    * 1: A minimal, boring implementation that follows the description literally without any flair.
+    * 3: A solid implementation that works but doesn't take any creative risks.
+    * 5: The model creatively strengthened the concept by adding thoughtful details, such as a clever `friendlyName`, appropriate trigger effects (e.g., a manifestation on impact), or a well-chosen color. The spell feels complete and well-designed.

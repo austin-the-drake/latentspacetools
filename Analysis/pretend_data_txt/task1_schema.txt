@@ -1,0 +1,1 @@
+Schema for task 1: Output JSON with keys 'accuracy' (1-5) and 'clarity' (1-5).

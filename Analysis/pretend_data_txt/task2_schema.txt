@@ -1,0 +1,1 @@
+Schema for task 2: Output JSON with keys 'creativity' (1-5) and 'engagement' (1-5).

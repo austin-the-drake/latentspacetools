@@ -1,0 +1,20 @@
+You MUST respond with a single, valid JSON object and nothing else. The root object must contain two keys: "scores" and "rationales".
+
+-   "scores": An object containing a numerical score (1-5) for each of the four rubric axes: `adherence`, `correctness`, `fidelity`, and `creativity`.
+-   "rationales": An object containing a brief, one-sentence text explanation for each of the four scores. The keys must be the same as the scores.
+
+Example Output:
+{
+    "scores": {
+        "adherence": 5,
+        "correctness": 5,
+        "fidelity": 4,
+        "creativity": 5
+    },
+    "rationales": {
+        "adherence": "The model correctly used only the components and properties defined in the rules.",
+        "correctness": "The output was perfectly structured and valid JSON.",
+        "fidelity": "The spell matched the core concept but could have emphasized the 'arrow' aspect more.",
+        "creativity": "Adding a secondary explosion via a deathTrigger was a very creative and appropriate touch."
+    }
+}

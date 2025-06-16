@@ -1,0 +1,21 @@
+You will evaluate the updated elemental data structure based on the following four axes. Score each from 1 (poor) to 5 (excellent).
+
+1.  **Structural Integrity (1-5):**
+    * 1: The fundamental JSON structure is broken (e.g., 'elements' list is missing or doesn't match the top-level keys).
+    * 3: The structure is mostly correct, but a detail map might be missing a required key like 'RGB_COLOR' or 'SOUND_LIB'.
+    * 5: The output is perfectly structured. The 'elements' list is perfectly in sync with the top-level keys, and every element's detail map contains all required keys.
+
+2.  **Request Fulfillment (1-5):**
+    * 1: The model completely failed to implement the user's specific request.
+    * 3: The model understood the request but implemented it incorrectly (e.g., used 0 instead of 1, or targeted the wrong element).
+    * 5: The model perfectly implemented the user's modification request exactly as stated.
+
+3.  **Logical Consistency (Bidirectionality) (1-5):**
+    * 1: The model made no attempt to enforce bidirectionality.
+    * 3: The model attempted bidirectionality but made an error (e.g., set X vs Y to 1, but Y vs X to 0 instead of -1).
+    * 5: All interactions are perfectly bidirectional. If X's effect on Y was changed, Y's effect on X was also correctly changed to the inverse. Self-interaction correctly remains 0.
+
+4.  **Data Preservation (1-5):**
+    * 1: The model unnecessarily changed many other values (interactions, colors, sounds) that were not part of the request.
+    * 3: The model unnecessarily changed one or two other values.
+    * 5: The model perfectly preserved all existing data that was not directly affected by the user's request.

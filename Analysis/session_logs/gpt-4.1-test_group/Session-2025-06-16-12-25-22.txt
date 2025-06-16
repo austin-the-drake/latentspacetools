@@ -1,0 +1,242 @@
+[spellScripting-2025-06-16-12-25-30]
+input::**Chronos' Whisper:** A faint golden hum emanates, the air shimmers around a target, then time visibly rewinds a few seconds for that object, restoring it to a previous state or position.
+context::["Space", "Sand", "Celestial", "Distortion", "Nether", "Death", "Void", "Steam"]
+response::{
+  "friendlyName": "Temporal Echo",
+  "components": [
+    {
+      "componentType": "aoe",
+      "radius": 140,
+      "turns": 3
+    },
+    {
+      "componentType": "element",
+      "element": "Distortion"
+    },
+    {
+      "componentType": "element",
+      "element": "Celestial"
+    },
+    {
+      "componentType": "color",
+      "rgb": [245, 222, 110]
+    },
+    {
+      "componentType": "manaCost",
+      "cost": 34
+    },
+    {
+      "componentType": "impactTrigger",
+      "reps": 1,
+      "payload_components": [
+        {
+          "componentType": "buffCaster",
+          "heal": 0
+        },
+        {
+          "componentType": "timerTrigger",
+          "secs": 2.5,
+          "payload_components": [
+            {
+              "componentType": "buffCaster",
+              "heal": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+---END_SECTION---
+
+[spellScripting-2025-06-16-12-25-33]
+input::**Verdant Embrace:** Hands glow with soft green light, touching the earth. Tiny sprouts erupt rapidly, intertwining and blossoming into a temporary, vibrant wall of thorny vines that springs up in moments.
+context::["Celestial", "Rune", "Blood", "Light", "Earth"]
+response::{
+  "friendlyName": "Verdant Barrier Bloom",
+  "components": [
+    {
+      "componentType": "wallCrawl",
+      "radius": 12,
+      "speed": 20
+    },
+    {
+      "componentType": "element",
+      "element": "Earth"
+    },
+    {
+      "componentType": "color",
+      "rgb": [72, 200, 62]
+    },
+    {
+      "componentType": "manaCost",
+      "cost": 18
+    },
+    {
+      "componentType": "impactTrigger",
+      "payload_components": [
+        {
+          "componentType": "manifestation",
+          "radius": 8,
+          "material_properties": {
+            "class": "solid",
+            "color_rgb": [49, 130, 34],
+            "blockpath": true,
+            "density": 2,
+            "viscous": false,
+            "elements": ["Earth"],
+            "harmful": true,
+            "lifespan": 8
+          }
+        }
+      ]
+    }
+  ]
+}
+---END_SECTION---
+
+[spellScripting-2025-06-16-12-25-35]
+input::**Echoing Void:** A hand gestures, pulling at the air. A small, silent vortex of inky blackness forms, absorbing all light and sound within its radius, then collapses inward with a soft, unnerving implosion.
+context::["Sand", "Bone", "Blood", "Sound", "Earth", "Void", "Spirit", "Illusion"]
+response::{
+  "friendlyName": "Silent Void Implosion",
+  "components": [
+    {
+      "componentType": "aoe",
+      "radius": 160,
+      "turns": 3
+    },
+    {
+      "componentType": "element",
+      "element": "Void"
+    },
+    {
+      "componentType": "element",
+      "element": "Sound"
+    },
+    {
+      "componentType": "color",
+      "rgb": [20, 8, 35]
+    },
+    {
+      "componentType": "manaCost",
+      "cost": 28
+    },
+    {
+      "componentType": "deathTrigger",
+      "count": 1,
+      "payload_components": [
+        {
+          "componentType": "explosion",
+          "radius": 112
+        },
+        {
+          "componentType": "element",
+          "element": "Void"
+        },
+        {
+          "componentType": "color",
+          "rgb": [25, 0, 40]
+        }
+      ]
+    }
+  ]
+}
+---END_SECTION---
+
+[spellScripting-2025-06-16-12-25-38]
+input::**Cinderstep Illusion:** A quick flick of the wrist. A fleeting, fiery doppelganger erupts from the caster's form, sprinting a short distance before dissolving into a shower of harmless, winking embers.
+context::["Celestial", "Poison", "Time", "Arcane", "Gravity", "Death", "Crystal", "Sand", "Light"]
+response::{
+  "friendlyName": "Ember Echo",
+  "components": [
+    {
+      "componentType": "projectile",
+      "radius": 8,
+      "speed": 18,
+      "gravity": 0.1
+    },
+    {
+      "componentType": "element",
+      "element": "Light"
+    },
+    {
+      "componentType": "element",
+      "element": "Arcane"
+    },
+    {
+      "componentType": "color",
+      "rgb": [255, 135, 50]
+    },
+    {
+      "componentType": "manaCost",
+      "cost": 15
+    },
+    {
+      "componentType": "spawnAngle",
+      "angle": 0
+    },
+    {
+      "componentType": "deathTrigger",
+      "payload_components": [
+        {
+          "componentType": "manifestation",
+          "radius": 5,
+          "material_properties": {
+            "class": "powder",
+            "color_rgb": [255, 200, 80],
+            "blockpath": false,
+            "density": 1,
+            "elements": ["Light", "Arcane"],
+            "harmful": false,
+            "lifespan": 1.2
+          }
+        }
+      ]
+    }
+  ]
+}
+---END_SECTION---
+
+[spellScripting-2025-06-16-12-25-42]
+input::**Sky-Singer's Charm:** A melodic hum, fingers tracing patterns in the air. Wisps of wind gather and condense, forming a miniature, hovering orb that emits a series of low, resonant chimes, affecting the disposition of nearby creatures.
+context::["Celestial", "Mind", "Bone", "Blood", "Fear", "Air", "Light", "Sound", "Wood", "Distortion"]
+response::{
+  "friendlyName": "Harmonious Wind Orb",
+  "components": [
+    {
+      "componentType": "manifestation",
+      "radius": 4,
+      "material_properties": {
+        "class": "gas",
+        "color_rgb": [180, 220, 255],
+        "blockpath": false,
+        "density": 0.5,
+        "elements": ["Air", "Sound", "Mind", "Celestial"],
+        "lifespan": 8
+      }
+    },
+    {
+      "componentType": "element",
+      "element": "Air"
+    },
+    {
+      "componentType": "element",
+      "element": "Sound"
+    },
+    {
+      "componentType": "element",
+      "element": "Mind"
+    },
+    {
+      "componentType": "color",
+      "rgb": [180, 220, 255]
+    },
+    {
+      "componentType": "manaCost",
+      "cost": 20
+    }
+  ]
+}
+---END_SECTION---
+
